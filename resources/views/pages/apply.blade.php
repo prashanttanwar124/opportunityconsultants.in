@@ -1,4 +1,5 @@
 @php
+    $site = \App\Support\SiteContent::group('general');
     $selected = [
         'level' => old('level'),
         'country' => old('country', strtoupper((string) request('country')) ?: null),
@@ -23,18 +24,18 @@
     $isUnsureCountry = ($lead?->country ?? $selected['country']) === 'XX';
 @endphp
 
-<x-layout :title="'Free counselling — '.config('site.name')">
+<x-layout :title="'Free counselling — '.$site['name']">
 <div class="apply-page">
     <div class="bg-layer bg-sky" aria-hidden="true"></div>
 
     <header class="apply-header">
         <div class="container">
-            <a href="{{ route('home') }}" class="brand" aria-label="{{ config('site.name') }} home">
+            <a href="{{ route('home') }}" class="brand" aria-label="{{ $site['name'] }} home">
                 <x-logo variant="mark" class="brand__mark hide-sm" />
-                <x-logo variant="word" class="brand__word" :alt="config('site.name').' — Study Abroad Consultant'" />
+                <x-logo variant="word" class="brand__word" :alt="$site['name'].' — Study Abroad Consultant'" />
             </a>
             <div class="apply-header__links">
-                <a href="tel:{{ config('site.phone') }}" class="plain hide-sm"><x-icon name="phone" size="18" />{{ config('site.phone_display') }}</a>
+                <a href="tel:{{ $site['phone'] }}" class="plain hide-sm"><x-icon name="phone" size="18" />{{ $site['phone_display'] }}</a>
                 <a href="{{ route('home') }}" style="text-underline-offset: 5px">Back to home</a>
             </div>
         </div>
@@ -89,7 +90,7 @@
                         <span>Your latest marksheets, any English test scores, your CV and a rough budget.</span>
                     </div>
                     <div class="btn-row">
-                        <a href="https://wa.me/{{ config('site.whatsapp') }}" class="btn btn--navy"><x-icon name="chat" size="20" />Chat on WhatsApp now</a>
+                        <a href="https://wa.me/{{ $site['whatsapp'] }}" class="btn btn--navy"><x-icon name="chat" size="20" />Chat on WhatsApp now</a>
                         <a href="{{ route('home') }}" class="btn btn--outline" style="padding: 0 22px">Back to home</a>
                     </div>
                     <a href="{{ route('apply') }}" class="done__restart">Start over</a>
@@ -189,7 +190,7 @@
 
                         <label for="ap-consent" class="consent">
                             <input id="ap-consent" name="consent" type="checkbox" value="1" @checked(old('consent')) required>
-                            <span>I agree to be contacted by {{ config('site.name') }} by phone, WhatsApp and email about studying or interning abroad.</span>
+                            <span>I agree to be contacted by {{ $site['name'] }} by phone, WhatsApp and email about studying or interning abroad.</span>
                         </label>
 
                         <p class="alert alert--error" role="alert" data-client-error hidden>Please add your name, a 10-digit WhatsApp number and tick the consent box.</p>

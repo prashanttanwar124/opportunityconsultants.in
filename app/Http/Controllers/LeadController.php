@@ -11,13 +11,21 @@ use Illuminate\View\View;
 class LeadController extends Controller
 {
     /**
-     * Store a "call me back" request from the home page.
+     * Store a "call me back" request from the home page or a custom page.
      */
     public function storeCallback(StoreCallbackRequest $request): RedirectResponse
     {
-        Lead::create($request->validated() + ['source' => Lead::SOURCE_CALLBACK]);
+        $data = $request->validated();
+        $pageSlug = $data['page_slug'] ?? null;
 
-        return redirect()->to(route('home').'#callback')
+        Lead::create($data + [
+            'source' => $pageSlug ? Lead::SOURCE_PAGE : Lead::SOURCE_CALLBACK,
+            'status' => Lead::STATUS_NEW,
+        ]);
+
+        $redirectTo = $pageSlug ? url('/'.$pageSlug).'#callback' : route('home').'#callback';
+
+        return redirect()->to($redirectTo)
             ->with('callback_sent', true);
     }
 
@@ -44,6 +52,7 @@ class LeadController extends Controller
     {
         $lead = Lead::create($request->validated() + [
             'source' => Lead::SOURCE_COUNSELLING,
+            'status' => Lead::STATUS_NEW,
             'consent' => true,
         ]);
 

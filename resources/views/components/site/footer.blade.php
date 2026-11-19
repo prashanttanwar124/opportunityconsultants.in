@@ -1,5 +1,15 @@
 @php
+    $site = \App\Support\SiteContent::group('general');
     $home = request()->routeIs('home') ? '' : route('home');
+    $footerPages = collect();
+
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('pages')) {
+            $footerPages = \App\Models\Page::forFooter()->get();
+        }
+    } catch (\Throwable) {
+        // Ignore when migrations have not run yet.
+    }
 @endphp
 
 <footer class="site-footer">
@@ -7,10 +17,10 @@
         <div class="grid-auto footer-grid">
             <div class="footer-brand">
                 <span class="footer-brand__logo">
-                    <x-logo variant="full" :alt="config('site.name').' — Study Abroad Consultant'" />
+                    <x-logo variant="full" :alt="$site['name'].' — Study Abroad Consultant'" />
                 </span>
-                <span class="footer-brand__tag">{{ config('site.tagline') }}</span>
-                <p>Free counselling for students and parents.</p>
+                <span class="footer-brand__tag">{{ $site['tagline'] }}</span>
+                <p>{{ $site['footer_tagline'] }}</p>
             </div>
 
             <nav class="footer-nav" aria-label="Programs">
@@ -33,16 +43,23 @@
             <nav class="footer-nav" aria-label="Company">
                 <strong>Company</strong>
                 <a href="{{ route('about') }}">About us</a>
+                <a href="{{ route('blog.index') }}">Blog &amp; guides</a>
                 <a href="{{ $home }}#faq">FAQ</a>
                 <a href="{{ route('apply') }}">Free counselling</a>
-                @foreach (config('site.socials') as $label => $url)
-                    <a href="{{ $url }}">{{ $label }}</a>
+                @foreach ($footerPages as $customPage)
+                    <a href="{{ route('pages.show', $customPage) }}">{{ $customPage->title }}</a>
                 @endforeach
+                @if (! empty($site['instagram_url']) && $site['instagram_url'] !== '#')
+                    <a href="{{ $site['instagram_url'] }}" target="_blank" rel="noopener">Instagram</a>
+                @endif
+                @if (! empty($site['youtube_url']) && $site['youtube_url'] !== '#')
+                    <a href="{{ $site['youtube_url'] }}" target="_blank" rel="noopener">YouTube</a>
+                @endif
             </nav>
         </div>
 
         <div class="footer-bottom">
-            <span>© {{ date('Y') }} {{ config('site.name') }}. All rights reserved.</span>
+            <span>© {{ date('Y') }} {{ $site['name'] }}. All rights reserved.</span>
             <span><a href="#">Privacy policy</a><a href="#">Terms</a></span>
         </div>
     </div>

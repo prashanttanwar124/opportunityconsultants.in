@@ -1,11 +1,15 @@
 @props(['title' => null, 'description' => null])
+@php
+    $site = \App\Support\SiteContent::group('general');
+    $scripts = \App\Support\SiteContent::group('scripts');
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? config('site.name').' — '.config('site.tagline') }}</title>
-    <meta name="description" content="{{ $description ?? 'Free counselling for study abroad and international internships. We help you choose the country and program, then handle applications, funding and visas.' }}">
+    <title>{{ $title ?? ($site['name'].' — '.$site['tagline']) }}</title>
+    <meta name="description" content="{{ $description ?? $site['meta_description'] }}">
     <meta name="theme-color" content="#0A2459">
     <link rel="icon" type="image/png" href="{{ asset('images/logo/mark-160.png') }}">
 
@@ -15,8 +19,14 @@
 
     <script>document.documentElement.classList.add('js');</script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (! empty($scripts['head_scripts']))
+        {!! $scripts['head_scripts'] !!}
+    @endif
 </head>
 <body>
     {{ $slot }}
+    @if (! empty($scripts['body_scripts']))
+        {!! $scripts['body_scripts'] !!}
+    @endif
 </body>
 </html>

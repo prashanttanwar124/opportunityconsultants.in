@@ -15,9 +15,13 @@ return [
     'name' => env('SITE_NAME', 'Opportunity Consultant'),
     'tagline' => 'Study Abroad & Internship Consultant',
 
-    'phone' => env('SITE_PHONE', '+919876543210'),
-    'phone_display' => env('SITE_PHONE_DISPLAY', '+91 98765 43210'),
-    'whatsapp' => env('SITE_WHATSAPP', '919876543210'),
+    'phone' => env('SITE_PHONE', '+917977632506'),
+    'phone_display' => env('SITE_PHONE_DISPLAY', '+91 79776 32506'),
+    'whatsapp' => env('SITE_WHATSAPP', '917977632506'),
+    'whatsapp_numbers' => [
+        ['display' => '+91 7977632506', 'wa' => '917977632506'],
+        ['display' => '+91 7391833220', 'wa' => '917391833220'],
+    ],
     'email' => env('SITE_EMAIL', 'hello@opportunityconsultant.in'),
 
     'address' => 'Office 204, Sai Arcade, Station Road, Virar West, Palghar 401303',

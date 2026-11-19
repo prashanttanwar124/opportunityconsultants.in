@@ -9,11 +9,6 @@ use Illuminate\Validation\Rule;
 class StoreCallbackRequest extends FormRequest
 {
     /**
-     * Where to send the visitor back to when validation fails.
-     */
-    protected $redirect = '/#callback';
-
-    /**
      * The error bag, so callback errors don't collide with other forms.
      */
     protected $errorBag = 'callback';
@@ -24,6 +19,19 @@ class StoreCallbackRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Where to redirect on validation failure.
+     */
+    protected function getRedirectUrl(): string
+    {
+        $pageSlug = $this->input('page_slug');
+        if (is_string($pageSlug) && $pageSlug !== '') {
+            return url('/'.$pageSlug).'#callback';
+        }
+
+        return route('home').'#callback';
     }
 
     /**
@@ -47,6 +55,7 @@ class StoreCallbackRequest extends FormRequest
             'name' => ['required', 'string', 'min:2', 'max:120'],
             'phone' => ['required', 'digits_between:10,15'],
             'interest' => ['required', Rule::in(array_keys(config('site.counselling.interests')))],
+            'page_slug' => ['nullable', 'string', 'max:160'],
         ];
     }
 
