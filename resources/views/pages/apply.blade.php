@@ -79,7 +79,7 @@
         </aside>
 
         {{-- Form card --}}
-        <section class="apply-card rise d2" aria-live="polite">
+        <section id="counselling-form" class="apply-card rise d2" style="scroll-margin-top: 24px" aria-live="polite">
             @if ($lead)
                 <div class="done">
                     <span class="done__badge" aria-hidden="true"><x-icon name="check" size="36" stroke="2.6" color="#0A2459" /></span>

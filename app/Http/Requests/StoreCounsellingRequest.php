@@ -9,6 +9,11 @@ use Illuminate\Validation\Rule;
 class StoreCounsellingRequest extends FormRequest
 {
     /**
+     * Scroll directly to the form card when validation fails.
+     */
+    protected $redirect = '/free-counselling#counselling-form';
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool

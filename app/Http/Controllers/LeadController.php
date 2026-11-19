@@ -56,6 +56,6 @@ class LeadController extends Controller
             'consent' => true,
         ]);
 
-        return redirect()->route('apply')->with('counselling_lead', $lead->id);
+        return redirect()->to(route('apply').'#counselling-form')->with('counselling_lead', $lead->id);
     }
 }

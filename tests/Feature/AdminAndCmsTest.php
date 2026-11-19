@@ -268,7 +268,7 @@ class AdminAndCmsTest extends TestCase
             'email' => 'rohan@example.com',
             'city' => 'Mumbai',
             'consent' => '1',
-        ])->assertRedirect(route('apply'));
+        ])->assertRedirect(route('apply').'#counselling-form');
 
         $this->get('/admin/leads')
             ->assertOk()
