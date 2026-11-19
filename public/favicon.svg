@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1557B0"/>
+      <stop offset="100%" stop-color="#0A2459"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="12" y1="48" x2="52" y2="14" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E59E16"/>
+      <stop offset="100%" stop-color="#FFD166"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded navy badge -->
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+
+  <!-- Minimal globe lines -->
+  <circle cx="30" cy="34" r="16" stroke="#FFFFFF" stroke-opacity="0.28" stroke-width="2.2"/>
+  <ellipse cx="30" cy="34" rx="8" ry="16" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1.8"/>
+  <line x1="14.5" y1="34" x2="45.5" y2="34" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1.8"/>
+
+  <!-- Gold flight arc -->
+  <path d="M12 46C22 45 34 38 45 25" stroke="url(#gold)" stroke-width="3.6" stroke-linecap="round"/>
+
+  <!-- Crisp gold airplane -->
+  <path d="M51.5 13.5L36.5 18.8L41.8 22.2L39.6 28.4L44.8 24.4L49.5 27.6L51.5 13.5Z" fill="url(#gold)"/>
+</svg>

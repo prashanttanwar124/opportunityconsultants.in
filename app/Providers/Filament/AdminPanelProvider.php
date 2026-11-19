@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->profile()
             ->darkMode(false)
             ->brandName(fn (): string => (string) SiteContent::get('general.name', config('site.name', 'Opportunity Consultant')))
-            ->favicon(asset('images/logo/mark-160.png'))
+            ->favicon(asset('favicon.svg'))
             ->colors([
                 'primary' => Color::hex('#1557B0'),
                 'warning' => Color::Amber,

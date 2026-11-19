@@ -11,7 +11,10 @@
     <title>{{ $title ?? ($site['name'].' — '.$site['tagline']) }}</title>
     <meta name="description" content="{{ $description ?? $site['meta_description'] }}">
     <meta name="theme-color" content="#0A2459">
-    <link rel="icon" type="image/png" href="{{ asset('images/logo/mark-160.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
